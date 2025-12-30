@@ -9,20 +9,29 @@ class Node {
 }
 */
 class Solution {
-    public static int findMax(Node root) {
-        // code here
-        while(root.right != null){
-            root = root.right;
-        }
-        return root.data;
-    }
+    static int min, max;
 
-    public static int findMin(Node root) {
-        
-        // code here
-        while(root.left != null){
-            root = root.left;
-        }
-        return root.data;
-    }
+public static void inorder(Node root) {
+    if (root == null) return;
+
+    min = Math.min(min, root.data);
+    max = Math.max(max, root.data);
+
+    inorder(root.left);
+    inorder(root.right);
+}
+
+public static int findMin(Node root) {
+    min = Integer.MAX_VALUE;
+    max = Integer.MIN_VALUE;
+    inorder(root);
+    return min;
+}
+
+public static int findMax(Node root) {
+    min = Integer.MAX_VALUE;
+    max = Integer.MIN_VALUE;
+    inorder(root);
+    return max;
+}
 }
